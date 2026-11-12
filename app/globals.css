@@ -1,26 +1,64 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #f8fafc;
+  --foreground: #0f172a;
+  --primary: #2563eb;
+  --primary-hover: #1d4ed8;
+  --primary-light: #eff6ff;
+  --border: #e2e8f0;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+* {
+  box-sizing: border-box;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Hide scrollbar for category pills */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* ── Print styles (FR-011) ───────────────────────────────────────────────────
+   When the user triggers window.print() from the Reports page, hide all
+   navigation / sidebar chrome so only the report content is printed.        */
+@media print {
+  /* Hide sidebar, header, and any element explicitly marked no-print */
+  nav,
+  aside,
+  header,
+  .no-print {
+    display: none !important;
+  }
+
+  /* Remove layout padding from the main content wrapper */
+  main {
+    margin: 0 !important;
+    padding: 0 !important;
+    overflow: visible !important;
+  }
+
+  /* Ensure full-width, white background */
+  body,
+  html {
+    background: #ffffff !important;
+    color: #000000 !important;
+  }
+
+  /* Avoid page breaks inside cards / table rows */
+  .card,
+  tr {
+    break-inside: avoid;
+  }
 }
